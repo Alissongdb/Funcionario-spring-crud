@@ -1,10 +1,9 @@
-package br.com.ciss.crud_funcionario.service;
+package br.com.ciss.crud_funcionario.funcionario;
 
-import br.com.ciss.crud_funcionario.Entity.Funcionario;
-import br.com.ciss.crud_funcionario.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -14,8 +13,17 @@ public class FuncionarioService {
     private FuncionarioRepository repository;
 
     public Funcionario salvarFuncionario(Funcionario funcionario) {
+
+        List<String> cargosPermitidos = Arrays.asList("desenvolvedor", "qa", "po", "suporte");
+
+        if (!cargosPermitidos.contains(funcionario.getCargo())) {
+            throw new RuntimeException("O cargo precisa ser: " + cargosPermitidos);
+        }
+
         return repository.save(funcionario);
     }
+
+
 
     public List<Funcionario> buscarTodos() {
         return repository.findAll();
