@@ -1,6 +1,5 @@
-package br.com.ciss.crud_funcionario.repository;
+package br.com.ciss.crud_funcionario.funcionario;
 
-import br.com.ciss.crud_funcionario.Entity.Funcionario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

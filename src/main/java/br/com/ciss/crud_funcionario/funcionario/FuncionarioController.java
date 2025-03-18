@@ -1,8 +1,5 @@
-package br.com.ciss.crud_funcionario.controller;
+package br.com.ciss.crud_funcionario.funcionario;
 
-import br.com.ciss.crud_funcionario.Entity.Funcionario;
-import br.com.ciss.crud_funcionario.dtos.FuncionarioDto;
-import br.com.ciss.crud_funcionario.service.FuncionarioService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +23,7 @@ public class FuncionarioController {
         Funcionario funcionario = modelMapper.map(funcionarioDto, Funcionario.class);
         Funcionario funcionarioSalvo = service.salvarFuncionario(funcionario);
         return modelMapper.map(funcionarioSalvo, FuncionarioDto.class);
+
     }
 
     @GetMapping

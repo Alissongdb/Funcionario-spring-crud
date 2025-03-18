@@ -1,4 +1,4 @@
-package br.com.ciss.crud_funcionario.config;
+package br.com.ciss.crud_funcionario.funcionario.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
