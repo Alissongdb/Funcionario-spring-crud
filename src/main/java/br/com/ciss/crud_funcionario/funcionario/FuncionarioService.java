@@ -23,8 +23,7 @@ public class FuncionarioService {
         return repository.save(funcionario);
     }
 
-
-
+    
     public List<Funcionario> buscarTodos() {
         return repository.findAll();
     }

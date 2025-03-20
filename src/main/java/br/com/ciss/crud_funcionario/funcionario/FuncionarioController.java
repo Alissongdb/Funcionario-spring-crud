@@ -3,6 +3,8 @@ package br.com.ciss.crud_funcionario.funcionario;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,10 +21,15 @@ public class FuncionarioController {
 
 
     @PostMapping
-    public FuncionarioDto salvarFuncionario(@RequestBody @Valid FuncionarioDto funcionarioDto) {
-        Funcionario funcionario = modelMapper.map(funcionarioDto, Funcionario.class);
-        Funcionario funcionarioSalvo = service.salvarFuncionario(funcionario);
-        return modelMapper.map(funcionarioSalvo, FuncionarioDto.class);
+    public ResponseEntity<Funcionario> salvarFuncionario(@RequestBody @Valid FuncionarioDto funcionarioDto) {
+            Funcionario funcionario = modelMapper.map(funcionarioDto, Funcionario.class);
+            Funcionario funcionarioSalvo = service.salvarFuncionario(funcionario);
+
+            if (funcionarioDto.getEmail() == null || funcionarioDto.getEmail().isEmpty()) {
+                throw new IllegalArgumentException("Informe um email");
+            } else {
+                return ResponseEntity.status(HttpStatus.CREATED).body(funcionarioSalvo);
+            }
 
     }
 
