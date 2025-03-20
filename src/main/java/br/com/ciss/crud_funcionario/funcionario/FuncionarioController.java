@@ -1,5 +1,7 @@
 package br.com.ciss.crud_funcionario.funcionario;
 
+import br.com.ciss.crud_funcionario.funcionario.ViaCep.ViaCepService;
+import br.com.ciss.crud_funcionario.funcionario.ViaCep.clients.ViaCepDto;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class FuncionarioController {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private ViaCepService viaCepService;
 
 
     @PostMapping
@@ -56,6 +61,13 @@ public class FuncionarioController {
     @DeleteMapping("/{id}")
     public void deletarFuncionario(@PathVariable Long id) {
         service.deletarFuncionario(id);
+    }
+
+
+    //VIA CEP
+    @GetMapping("/endereco/{cep}")
+    public ResponseEntity<ViaCepDto> buscarDadosCep(@PathVariable("cep") String cep) {
+        return ResponseEntity.ok(viaCepService.buscarDadosEndereco(cep));
     }
 
 
